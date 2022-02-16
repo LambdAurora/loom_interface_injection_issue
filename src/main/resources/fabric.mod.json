@@ -33,14 +33,8 @@
   },
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_3494": [
-        "loom_test/TagInterface"
-      ],
-      "net/minecraft/class_3494\u0024class_3495": [
-        "loom_test/TagBuilderInterface"
-      ],
-      "net/minecraft/class_6862": [
-        "loom_test/TagKeyInterface"
+      "net/minecraft/class_2378": [
+        "loom_test/type_erasure/RegistryEventStorage"
       ]
     }
   }

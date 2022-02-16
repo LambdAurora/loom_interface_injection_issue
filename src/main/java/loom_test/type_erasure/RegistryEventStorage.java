@@ -14,17 +14,8 @@
  * limitations under the License.
  */
 
-package net.fabricmc.example.mixin;
+package loom_test.type_erasure;
 
-import com.google.common.collect.Interner;
-import net.minecraft.tag.TagKey;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
-
-@Mixin(TagKey.class)
-public interface TagKeyAccessor {
-	@Accessor("INTERNER")
-	static Interner<TagKey<?>> getInterner() {
-		throw new IllegalStateException("Injection failed.");
-	}
+public interface RegistryEventStorage<V> {
+	Event<RegistryEvents.EntryAdded<V>> getEntryAddedEvent();
 }

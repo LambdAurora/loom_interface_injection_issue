@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2022 QuiltMC
+ * Copyright 2022 QuiltMC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-package net.fabricmc.example.mixin;
+package loom_test.type_erasure;
 
-import loom_test.TagHooks;
-import loom_test.TagInterface;
-import net.minecraft.tag.Tag;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import net.minecraft.util.registry.Registry;
 
-@Mixin(Tag.class)
-public class TagMixin implements TagInterface, TagHooks {
-	@Unique
-	private int loom_test$replaced;
-
-	@Override
-	public boolean hasBeenReplaced() {
-		return this.loom_test$replaced > 0;
+public final class RegistryEvents {
+	private RegistryEvents() {
 	}
 
-	@Override
-	public void loom_test$setReplacementCount(int replacementCount) {
-		this.loom_test$replaced = replacementCount;
+	@SuppressWarnings("unchecked")
+	public static <V> Event<EntryAdded<V>> getEntryAddEvent(Registry<V> registry) {
+		return ((RegistryEventStorage<V>) registry).getEntryAddedEvent();
+	}
+
+	@FunctionalInterface
+	public interface EntryAdded<V> {
+		void onAdded(RegistryEntryContext<V> context);
 	}
 }
